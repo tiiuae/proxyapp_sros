@@ -39,7 +39,7 @@ jobs:
       - name: Upload to Artifactory
         env:
           ARTIFACTORY_REPO: debian-public-local
-          DISTRIBUTION: focal
+          DISTRIBUTION: galactic
           COMPONENT: fog-sw-sros
           ARCHITECTURE: amd64
           BUILD_NAME: proxyapp-sros
