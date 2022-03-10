@@ -1,0 +1,17 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from fog_msgs/srv/Vec4.srv
+// generated code does not contain a copyright notice
+
+
+module fog_msgs {
+  module srv {
+    struct Vec4_Request {
+      sequence<double> goal;
+    };
+    struct Vec4_Response {
+      boolean success;
+
+      string message;
+    };
+  };
+};

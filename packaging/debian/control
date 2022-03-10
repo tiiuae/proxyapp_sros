@@ -1,0 +1,7 @@
+Package: proxyapp
+Version: VERSION
+Maintainer: Manuel Segarra-Abad <manuel.segarra-abad@unikie.com>
+Architecture: amd64
+Description: ProxyApp for navigation commands
+Depends: ros-galactic-ros-core, ros-galactic-fastcdr, ros-galactic-fastrtps,
+ ros-galactic-fastrtps-cmake-module
