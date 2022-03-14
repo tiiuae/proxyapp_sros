@@ -1,0 +1,5 @@
+#!/bin/bash
+
+systemctl enable proxyapp.service
+
+exit 0

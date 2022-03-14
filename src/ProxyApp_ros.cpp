@@ -152,7 +152,7 @@ public:
 
     gps_waypoint_service_ =
       this->create_service<fog_msgs::srv::Vec4>(
-      "/" + drone_namespace_ + "/secure/navigation/gps_waypoint",
+      "/" + drone_namespace_ + "/gps_waypoint",
       std::bind(&SecureServiceServer::gpsWaypointCallback, this, _1, _2));
   }
 

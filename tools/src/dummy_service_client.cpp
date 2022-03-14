@@ -28,7 +28,7 @@ DummyServiceClient::DummyServiceClient(
   count_(0)
 {
   gps_waypoint_client_ = this->create_client<fog_msgs::srv::Vec4>(
-    "/" + drone_namespace_ + "/navigation/gps_waypoint");
+    "/" + drone_namespace_ + "/gps_waypoint");
 
   timer_ = this->create_wall_timer(
     2s, std::bind(&DummyServiceClient::timer_callback_, this));
