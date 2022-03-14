@@ -30,8 +30,11 @@ make
 popd
 
 mkdir -p ${dest_dir}/usr/bin
-cp -f ${build_dir}/proxyapp_build/proxyapp ${dest_dir}/usr/bin/ || exit
-chmod +x ${dest_dir}/usr/bin/proxyapp || exit
+cp -f ${build_dir}/proxyapp_build/proxyapp_ros ${dest_dir}/usr/bin/ || exit
+chmod +x ${dest_dir}/usr/bin/proxyapp_ros || exit
 
 cp -f ${build_dir}/proxyapp_server_client_build/proxyapp_server_client ${dest_dir}/usr/bin/ || exit
 chmod +x ${dest_dir}/usr/bin/proxyapp_server_client || exit
+
+mkdir -p ${dest_dir}/etc/systemd/system
+cp -f ${build_dir}/systemd/proxyapp.service ${dest_dir}/etc/systemd/system/ || exit
