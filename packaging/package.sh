@@ -84,7 +84,7 @@ cd $mod_dir
 echo "[INFO] Creating deb package..."
 set +u
 [ "$arch" = "" ] && arch="amd64"
-[ "$package_version" = "" ] && package_version=1.0.0
+[ "$package_version" = "" ] && package_version=2.0.0
 set -u
 
 ## Generate package

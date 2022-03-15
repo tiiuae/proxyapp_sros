@@ -48,7 +48,7 @@ RMW_IMPLEMENTATION=rmw_fastrtps_cpp \
 ROS_SECURITY_KEYSTORE=<sros-keystore> \
 ROS_SECURITY_ENABLE=true \
 ROS_SECURITY_STRATEGY=Enforce \
-proxyapp_server_client server $DRONE_DEVICE_ID $DRONE_DEVICE_ID --ros-args --enclave /<sros-enclave>
+proxyapp_server_client client $DRONE_DEVICE_ID $DRONE_DEVICE_ID --ros-args --enclave /<sros-enclave>
 ```
 
 ## Run the client without SROS
