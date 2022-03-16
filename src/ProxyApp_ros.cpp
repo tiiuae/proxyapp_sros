@@ -128,14 +128,14 @@ public:
     std::shared_ptr<std_srvs::srv::Trigger::Response> & response)
   {
     if (!land_client_->service_is_ready()) {
-      RCLCPP_ERROR(this->get_logger(), "GPS waypoint service is not ready, waiting");
+      RCLCPP_ERROR(this->get_logger(), "Land service is not ready, waiting");
       return false;
     }
     auto client_future = land_client_->async_send_request(request);
     client_future.wait();
     auto resp = client_future.get();
     // RCLCPP_INFO(
-    //   this->get_logger(), "GPS waypoint service response: %s",
+    //   this->get_logger(), "Land service response: %s",
     //   resp->success ? "success" : "fail");
     response->success = resp->success;
     response->message = resp->message;
