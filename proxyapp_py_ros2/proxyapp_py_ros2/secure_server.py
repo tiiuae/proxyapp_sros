@@ -42,7 +42,7 @@ class SecureServer(Node):
         while self.s.connect_ex(self.unsecure_client_address) != 0:
             self.get_logger().info('Waiting for socket client to connect...')
             sleep(1)
-        self.srv = self.create_service(Vec4, 'secure/navigation/gps_waypoint', self.service_callback)
+        self.srv = self.create_service(Vec4, 'gps_waypoint', self.service_callback)
         
         self.MAX_TIME_OUT = 2.0
         

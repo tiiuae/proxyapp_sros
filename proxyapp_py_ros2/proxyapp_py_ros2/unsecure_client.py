@@ -48,7 +48,7 @@ class UnsecureClient(Node):
         
         self.s.listen(2)
         self.client_socket, adress = self.s.accept()
-        self.cli = self.create_client(Vec4, 'navigation/gps_waypoint')
+        self.cli = self.create_client(Vec4, 'gps_waypoint')
         
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')

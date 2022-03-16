@@ -4,4 +4,4 @@ Maintainer: Manuel Segarra-Abad <manuel.segarra-abad@unikie.com>
 Architecture: amd64
 Description: ProxyApp for navigation commands
 Depends: ros-galactic-ros-core, ros-galactic-fastcdr, ros-galactic-fastrtps,
- ros-galactic-fastrtps-cmake-module
+ ros-galactic-fastrtps-cmake-module, python3-pandas, python3-tk
