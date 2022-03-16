@@ -9,7 +9,7 @@ User=sad
 Group=sad
 Restart=always
 RestartSec=10
-ExecStart=/bin/sh -c ". /opt/ros/galactic/setup_fog_sec.sh; ROS_DOMAIN_ID=1 /usr/bin/proxyapp_ros --ros-args --enclave /fog/proxyapp -r __node:=$DRONE_DEVICE_ID -p drone_id:=$DRONE_DEVICE_ID -p drone_namespace:=$DRONE_DEVICE_ID"
+ExecStart=/bin/sh -c ". /opt/ros/galactic/setup_fog.sh; /usr/bin/proxyapp_ros --ros-args -r __node:=$DRONE_DEVICE_ID -p drone_id:=$DRONE_DEVICE_ID -p drone_namespace:=$DRONE_DEVICE_ID"
 
 [Install]
 WantedBy=multi-user.target

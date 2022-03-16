@@ -2,7 +2,7 @@ name: main
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, DP-2407-create-branch-build-of-proxy-app-for-build-5-2 ]
   pull_request:
     branches: [ main ]
 

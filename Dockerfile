@@ -23,14 +23,12 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     wget \
     libssl-dev \
     libssl-dev \
+    ros-galactic-rmw-fastrtps-cpp \
+    ros-galactic-fastrtps \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote/ros-galactic-foonathan-memory-vendor_1.1.0-4~git20220310.bbb8a5c_amd64.deb \
-    && wget https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote/ros-galactic-fastcdr_1.0.20-5~git20220310.f65f034_amd64.deb \
-    && wget https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote/ros-galactic-fastrtps_2.5.0-7~git20220310.4ca1f95_amd64.deb \
-    && wget https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote/ros-galactic-fastrtps-cmake-module_1.2.1-6~git20220310.67ed436_amd64.deb \
-    && wget https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote/ros-galactic-fog-msgs_0.0.8-42~git20220104.1d2cf3f_amd64.deb \
-    && dpkg -i ros-galactic-foonathan-memory-vendor*.deb ros-galactic-fastcdr*.deb ros-galactic-fastrtps_*.deb ros-galactic-fastrtps-cmake-module*.deb ros-galactic-fog-msgs*.deb
+RUN wget https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote/ros-galactic-fog-msgs_0.0.8-42~git20220104.1d2cf3f_amd64.deb \
+    && dpkg -i ros-galactic-fog-msgs*.deb
 
 WORKDIR /build
 
