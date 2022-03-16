@@ -2,7 +2,7 @@ name: main
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, python_version ]
   pull_request:
     branches: [ main ]
 
