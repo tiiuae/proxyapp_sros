@@ -22,11 +22,13 @@ include_directories(
 
 set(library_name ${executable_name}_core)
 
-add_library(${library_name} SHARED
-  src/node_thread.cpp
+set(executable_name proxyapp_ros)
+
+add_executable(${executable_name}
+  src/ProxyApp_ros.cpp
 )
 
-ament_target_dependencies(${library_name}
+ament_target_dependencies(${executable_name}
   rclcpp
   std_msgs
   std_srvs
@@ -34,30 +36,14 @@ ament_target_dependencies(${library_name}
   fog_msgs
 )
 
-set(executable_name proxyapp_ros)
-
-add_executable(${executable_name}
-  src/ProxyApp_ros.cpp
-)
-
-
 ament_target_dependencies(${PROJECT_NAME} rclcpp std_msgs std_srvs nav_msgs fog_msgs)
-
-install(
-  TARGETS
-    ${library_name}
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
-)
 
 install(TARGETS ${executable_name}
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
-
 ament_export_include_directories(include)
-ament_export_libraries(${library_name})
+# ament_export_libraries(${library_name})
 ament_export_dependencies(${dependencies})
 
 ament_package()
