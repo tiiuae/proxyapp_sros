@@ -1,5 +1,5 @@
 #!/bin/bash
 
-systemctl enable proxyapp_py_unsecure_client.service
+systemctl enable proxyapp_py_secure_client.service
 
 exit 0
