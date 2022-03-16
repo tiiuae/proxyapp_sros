@@ -17,7 +17,8 @@ iversion=${PACKAGE_VERSION:=latest}
 docker build \
   --build-arg BUILD_NUMBER="${build_number}" \
   --pull \
-  -t "${iname}_build:${iversion}" .
+  -t "${iname}_build:${iversion}" \
+  -f proxyapp_py_ros2/Dockerfile .
 
 container_id=$(docker create "${iname}_build" "")
 docker cp "${container_id}":/packages .

@@ -40,7 +40,7 @@ RUN params= \
     && [ ! "${BUILD_NUMBER}" = "" ] && params="$params -b ${BUILD_NUMBER}" || : \
     && [ ! "${GIT_VERSION_STRING}" = "" ] && params="$params -v ${GIT_VERSION_STRING}" || : \
     && [ ! "${GIT_COMMIT_HASH}" = "" ] && params="$params -g ${GIT_COMMIT_HASH}" || : \
-    && ./packaging/package.sh $params
+    && ./proxyapp_py_ros2/packaging/package.sh $params
 
 FROM scratch
-COPY --from=fog-sw-builder /build/*.deb /packages/
+COPY --from=fog-sw-builder /build/proxyapp_py_ros2/*.deb /packages/
