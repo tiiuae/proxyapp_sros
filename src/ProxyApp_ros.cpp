@@ -22,7 +22,8 @@
 #include "rclcpp/rclcpp.hpp"
 
 #include <fog_msgs/srv/vec4.hpp>
-// #include "node_thread.hpp"
+#include <std_srvs/srv/trigger.hpp>
+
 
 using std::placeholders::_1;
 using std::placeholders::_2;
@@ -98,6 +99,8 @@ public:
   {
     gps_waypoint_client_ = this->create_client<fog_msgs::srv::Vec4>(
       "/" + drone_namespace_ + "/navigation/gps_waypoint");
+    land_client_ = this->create_client<std_srvs::srv::Trigger>(
+      "/" + drone_namespace_ + "/control_interface/land");
   }
   virtual ~UnsecureServiceClient() {}
 
@@ -120,10 +123,30 @@ public:
     return true;
   }
 
+  bool relayRequest(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
+    std::shared_ptr<std_srvs::srv::Trigger::Response> & response)
+  {
+    if (!land_client_->service_is_ready()) {
+      RCLCPP_ERROR(this->get_logger(), "Land service is not ready, waiting");
+      return false;
+    }
+    auto client_future = land_client_->async_send_request(request);
+    client_future.wait();
+    auto resp = client_future.get();
+    // RCLCPP_INFO(
+    //   this->get_logger(), "Land service response: %s",
+    //   resp->success ? "success" : "fail");
+    response->success = resp->success;
+    response->message = resp->message;
+    return true;
+  }
+  
 private:
   std::string drone_id_, drone_namespace_;
   size_t count_;
   rclcpp::Client<fog_msgs::srv::Vec4>::SharedPtr gps_waypoint_client_;
+  rclcpp::Client<std_srvs::srv::Trigger>::SharedPtr land_client_;
 };
 
 
@@ -154,6 +177,11 @@ public:
       this->create_service<fog_msgs::srv::Vec4>(
       "/" + drone_namespace_ + "/gps_waypoint",
       std::bind(&SecureServiceServer::gpsWaypointCallback, this, _1, _2));
+
+    land_service_ =
+      this->create_service<std_srvs::srv::Trigger>(
+      "/" + drone_namespace_ + "/land",
+      std::bind(&SecureServiceServer::landCallback, this, _1, _2));
   }
 
   ~SecureServiceServer()
@@ -179,6 +207,23 @@ private:
       response->success ? "success" : "fail");
   }
 
+  // service callbacks
+  void landCallback(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
+    std::shared_ptr<std_srvs::srv::Trigger::Response> response)
+  {
+
+    RCLCPP_INFO(this->get_logger(), "Received land trigger request");
+    if (unsecure_client_->relayRequest(request, response)) {
+      RCLCPP_INFO(this->get_logger(), "Relayed land trigger");
+    } else {
+      RCLCPP_INFO(this->get_logger(), "Failed to relay land trigger");
+    }
+    RCLCPP_INFO(
+      this->get_logger(), "Land trigger service response: %s",
+      response->success ? "success" : "fail");
+  }
+
   int random_(
     int min,
     int max);
@@ -191,6 +236,7 @@ private:
   std::unique_ptr<NodeThread> rclcpp_thread_;
 
   rclcpp::Service<fog_msgs::srv::Vec4>::SharedPtr gps_waypoint_service_;
+  rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr land_service_;
   size_t count_;
 };
 
